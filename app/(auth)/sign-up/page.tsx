@@ -40,7 +40,7 @@ const SignUpPage = () => {
       if (response.error) {
         toast.error(response.error);
       } else {
-        toast.success("Account created successfully.");
+        toast.success(response.success);
         form.reset();
         router.push("/sign-in");
       }

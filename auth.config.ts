@@ -59,6 +59,15 @@ export default {
     },
   },
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
+
+      const query = await db.select().from(users).where(eq(users.id, user.id!));
+      const existingUser = query[0];
+      if (!existingUser?.emailVerified) return false;
+
+      return true;
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;

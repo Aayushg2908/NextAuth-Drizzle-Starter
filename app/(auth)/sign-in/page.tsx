@@ -37,8 +37,12 @@ const SignInPage = () => {
       if (response?.error) {
         toast.error(response?.error);
       } else {
-        toast.success("Logged in successfully.");
-        form.reset();
+        if (response?.success) {
+          toast.success("Confirmation Email Sent!");
+        } else {
+          toast.success("Logged in successfully!");
+          form.reset();
+        }
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");
